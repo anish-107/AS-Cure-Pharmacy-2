@@ -1,5 +1,5 @@
 /** ProductCard.tsx
- * @author Dibyasmita
+ * @author Dibyasmita Arpan
  * @description This is the Project Card Component
  * @date 18-1-2026
  * @returns a TSX component
@@ -14,19 +14,21 @@ import { useState } from "react";
 import { X, MessageCircle, Sparkles, ExternalLink } from "lucide-react";
 
 // Type Hints
-import type { ProductItem } from "@/lib/details";
+import type { Medicine } from "@/lib/details";
 
 // Exports
 export default function ProductCard({
   name,
   composition,
   description,
-  highlights,
+  uses,
+  cautions,
+  possibleSideEffects,
   image,
   featured,
-}: ProductItem) {
+}: Medicine) {
   // Logic
-  
+
   const [open, setOpen] = useState<boolean>(false);
 
   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER as string;
@@ -125,10 +127,11 @@ export default function ProductCard({
           onClick={() => setOpen(false)}
         >
           <div
-            className="max-w-lg w-full rounded-2xl p-6 shadow-2xl"
+            className="max-w-lg w-full max-h-[90vh] overflow-y-auto rounded-2xl p-6 shadow-2xl"
             style={{ backgroundColor: "var(--color-bg-card)" }}
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Header */}
             <div className="flex justify-between items-center mb-4">
               <h3
                 className="text-xl font-semibold"
@@ -146,36 +149,107 @@ export default function ProductCard({
               </button>
             </div>
 
+            {/* Image */}
             <img
               src={image}
               alt={name}
-              className="h-48 mx-auto object-contain mb-4"
+              className="h-48 w-full mx-auto object-contain mb-4"
             />
 
-            <p
-              className="text-sm font-medium mb-2"
-              style={{ color: "var(--color-text-primary)" }}
-            >
-              Composition: {composition}
-            </p>
+            {/* Composition */}
+            <div className="mb-4">
+              <h4
+                className="text-sm font-semibold mb-2"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                Composition
+              </h4>
 
-            <p
-              className="text-sm mb-4"
-              style={{ color: "var(--color-text-secondary)" }}
-            >
-              {description}
-            </p>
+              <ul
+                className="list-disc pl-5 space-y-1 text-sm"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                {composition.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </div>
 
-            {/* Highlights */}
-            <ul
-              className="list-disc pl-5 mb-6 space-y-2 text-sm"
-              style={{ color: "var(--color-text-secondary)" }}
-            >
-              {highlights.map((point, index) => (
-                <li key={index}>{point}</li>
-              ))}
-            </ul>
+            {/* Description */}
+            <div className="mb-5">
+              <h4
+                className="text-sm font-semibold mb-2"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                Description
+              </h4>
 
+              <p
+                className="text-sm leading-6"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                {description}
+              </p>
+            </div>
+
+            {/* Uses */}
+            <div className="mb-5">
+              <h4
+                className="text-sm font-semibold mb-2"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                Uses
+              </h4>
+
+              <ul
+                className="list-disc pl-5 space-y-1 text-sm"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                {uses.map((use, index) => (
+                  <li key={index}>{use}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Cautions */}
+            <div className="mb-5">
+              <h4
+                className="text-sm font-semibold mb-2"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                Cautions
+              </h4>
+
+              <ul
+                className="list-disc pl-5 space-y-1 text-sm"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                {cautions.map((caution, index) => (
+                  <li key={index}>{caution}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Possible Side Effects */}
+            <div className="mb-6">
+              <h4
+                className="text-sm font-semibold mb-2"
+                style={{ color: "var(--color-text-primary)" }}
+              >
+                Possible Side Effects
+              </h4>
+
+              <ul
+                className="list-disc pl-5 space-y-1 text-sm"
+                style={{ color: "var(--color-text-secondary)" }}
+              >
+                {possibleSideEffects.map((effect, index) => (
+                  <li key={index}>{effect}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* WhatsApp */}
             <a
               href={whatsappLink}
               target="_blank"
