@@ -1,5 +1,5 @@
 /** Product.tsx
- * @author Dibyasmita
+ * @author Dibyasmita Arpan
  * @description This is the Products Component
  * @date 18-1-2026
  * @returns a TSX component
@@ -13,13 +13,13 @@ import ProductCard from "./ProductCard";
 import { Package } from "lucide-react";
 
 // Content
-import { productsList } from "@/lib/details";
+import { medicines } from "@/lib/details";
 
 // Exports
 export default function Products() {
   // Logic
   // If needed in future
-  
+
   // Return
   return (
     <section
@@ -62,8 +62,8 @@ export default function Products() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {productsList.map((product, index) => (
-            <ProductCard key={index} {...product} />
+          {medicines.map((medicine, index) => (
+            <ProductCard key={index} {...medicine} />
           ))}
         </div>
       </div>
